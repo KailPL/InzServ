@@ -13,7 +13,7 @@ public class Server {
         try {
             while (!serverSocket.isClosed()) {
                 Socket socket = serverSocket.accept();
-                System.out.println("nowe polaczenie soketem");
+                System.out.println("server odpala sokea");
                 ClientHandler clientHandler = new ClientHandler(socket);
                 Thread thread = new Thread(clientHandler);
                 thread.start();
@@ -36,7 +36,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Hello world!");
+        System.out.println("wstaje server");
         ServerSocket serverSocket = new ServerSocket(23456);
         Server server = new Server(serverSocket);
         server.startServer();

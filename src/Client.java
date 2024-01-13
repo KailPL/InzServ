@@ -1,62 +1,66 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Client {
-    private BufferedWriter bufferedWriter;
-    private BufferedReader bufferedReader;
+    private ObjectOutputStream  objectOutputStream;
+    private ObjectInputStream  objectInputStream;
     private Socket socket;
     private String clientId;
 
     public Client(Socket socket, String clientId) {
         try {
             this.socket = socket;
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
             this.clientId = clientId;
+            Pakiet pakiet = new Pakiet(clientId);
+            objectOutputStream.writeObject(pakiet);
+            System.out.println("WYSYLAM ID");
         } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
+            closeEverything(socket, objectInputStream, objectOutputStream);
         }
     }
 
     public void sendMessage() {
         try {
-            bufferedWriter.write(clientId);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
+
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
-                String messageToSend = scanner.nextLine();
-                bufferedWriter.write(clientId + messageToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
+                String mess = scanner.nextLine();
+                Pakiet pakiet = new Pakiet(mess);
+                objectOutputStream.writeObject(pakiet);
+
             }
         } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
+            closeEverything(socket, objectInputStream, objectOutputStream);
         }
     }
 
     public void listenForMessage() {
         new Thread(() -> {
-            String messageFromChat;
             while (socket.isConnected()) {
                 try {
-                    messageFromChat = bufferedReader.readLine();
-                    System.out.println(messageFromChat);
+
+                    Pakiet pakiet = (Pakiet) objectInputStream.readObject();
+                    System.out.println(pakiet.getName());
                 } catch (IOException e) {
-                    closeEverything(socket, bufferedReader, bufferedWriter);
+                    closeEverything(socket, objectInputStream, objectOutputStream);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
     }
 
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public void closeEverything(Socket socket, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) {
         try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
+            if (objectInputStream != null) {
+                objectInputStream.close();
             }
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
+            if (objectOutputStream != null) {
+                objectOutputStream.close();
             }
             if (socket != null) {
                 socket.close();

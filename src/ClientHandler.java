@@ -6,47 +6,51 @@ public class ClientHandler implements Runnable {
 
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();//lista wszystkioch polaczanych kliejtnów przez cient handler
     private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
+    private ObjectInputStream objectInputStream;
+    private ObjectOutputStream objectOutputStream;
     private String clientId;
 
     public ClientHandler(Socket socket) {
         try {
             this.socket = socket;
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.clientId = bufferedReader.readLine();
+            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            Pakiet pakiet = (Pakiet) objectInputStream.readObject();
+            this.clientId = pakiet.getName();
             clientHandlers.add(this);
             broadcastMessage("client o id dolaczycl:" + clientId);
-        } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
+        } catch (IOException | ClassNotFoundException e) {
+            closeEverything(socket, objectInputStream, objectOutputStream);
         }
     }
 
     @Override
     public void run() {
+        Pakiet pakiet;
         String messageFromCLient;
         while (socket.isConnected()) {
             try {
-                messageFromCLient = bufferedReader.readLine();
+                pakiet = (Pakiet) objectInputStream.readObject();
+                messageFromCLient = pakiet.getName();
+                System.out.println("odebrano:"+messageFromCLient);
                 broadcastMessage(messageFromCLient);
-            } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
+            } catch (IOException | ClassNotFoundException e) {
+                closeEverything(socket, objectInputStream, objectOutputStream);
                 break;
             }
         }
     }
 
     public void broadcastMessage(String messageToSend) {
+        Pakiet pakiet = new Pakiet(messageToSend);
         for (ClientHandler clientHandler : clientHandlers) {
             try {
                 if (!clientHandler.clientId.equals(clientId)) {
-                    clientHandler.bufferedWriter.write(messageToSend);
-                    clientHandler.bufferedWriter.newLine();
-                    clientHandler.bufferedWriter.flush();
+                    clientHandler.objectOutputStream.writeObject(pakiet);
+                    clientHandler.objectOutputStream.flush();
                 }
             } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
+                closeEverything(socket, objectInputStream, objectOutputStream);
             }
         }
     }
@@ -56,14 +60,14 @@ public class ClientHandler implements Runnable {
         broadcastMessage("serv: client id disconencted;" + clientId);
     }
 
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public void closeEverything(Socket socket, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) {
         removeClientHandler();
         try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
+            if (objectInputStream != null) {
+                objectInputStream.close();
             }
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
+            if (objectOutputStream != null) {
+                objectOutputStream.close();
             }
             if (socket != null) {
                 socket.close();
