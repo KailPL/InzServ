@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="432513e3-d19d-4702-91a6-cbd748df1d4d" name="Changes" comment="">
+    <list default="true" id="432513e3-d19d-4702-91a6-cbd748df1d4d" name="Changes" comment="Server chatowy pakietowy i z gui">
+      <change afterPath="$PROJECT_DIR$/img/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Generator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Showmap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pakiet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pakiet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +55,22 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\IntelijiProjekty\inzServ\InzServ\img" />
+      <recent name="F:\IntelijiProjekty\inzServ\InzServ\src" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
+      <module name="InzServ" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Generator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Generator" />
       <module name="InzServ" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -61,7 +83,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Showmap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Showmap" />
+      <module name="InzServ" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
+      <item itemvalue="Application.Generator" />
+      <item itemvalue="Application.Showmap" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.Server" />
     </list>
@@ -69,6 +100,8 @@
       <list>
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Showmap" />
+        <item itemvalue="Application.Generator" />
       </list>
     </recent_temporary>
   </component>
@@ -82,7 +115,9 @@
       <updated>1704964742449</updated>
       <workItem from="1704964743583" duration="10218000" />
       <workItem from="1705141256180" duration="9122000" />
-      <workItem from="1705495069802" duration="1841000" />
+      <workItem from="1705495069802" duration="6661000" />
+      <workItem from="1706214715767" duration="5043000" />
+      <workItem from="1706381932635" duration="13647000" />
     </task>
     <task id="LOCAL-00001" summary="1 commit">
       <option name="closed" value="true" />
@@ -108,11 +143,30 @@
       <option name="project" value="LOCAL" />
       <updated>1705155009449</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Server pakietowy tcp">
+      <option name="closed" value="true" />
+      <created>1705532853943</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705532853943</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -129,6 +183,8 @@
     <MESSAGE value="1 commit" />
     <MESSAGE value="Server czatowy" />
     <MESSAGE value="Server pakietowy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Server pakietowy" />
+    <MESSAGE value="Server pakietowy tcp" />
+    <MESSAGE value="Server chatowy pakietowy i z gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server chatowy pakietowy i z gui" />
   </component>
 </project>

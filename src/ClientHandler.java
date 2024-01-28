@@ -42,7 +42,7 @@ public class ClientHandler implements Runnable {
     }
 
     public void broadcastMessage(String messageToSend) {
-        Pakiet pakiet = new Pakiet(messageToSend);
+        Pakiet pakiet = new Pakiet(1, messageToSend);
         for (ClientHandler clientHandler : clientHandlers) {
             try {
                 if (!clientHandler.clientId.equals(clientId)) {
@@ -57,7 +57,7 @@ public class ClientHandler implements Runnable {
 
     public void removeClientHandler() {
         clientHandlers.remove(this);
-        broadcastMessage("serv: client id disconencted;" + clientId);
+        broadcastMessage("SERVER: client "+clientId +" disconencted" );
     }
 
     public void closeEverything(Socket socket, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) {
