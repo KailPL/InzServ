@@ -97,12 +97,12 @@ public class Generator {
 
 
     public static void main(String[] args) {
-        int width = 50;
-        int height = 50;
+        int width = 256;
+        int height = 256;
         int[][] noiseArray = new int[height][width];
 
         Generator noiseGen = new Generator();
-        noiseGen.generateNoise(width, height, noiseArray, 3, 20, 0.1);
+        noiseGen.generateNoise(width, height, noiseArray, 55, 200, 0.3);
 
         int min =0;
         int max =0;
