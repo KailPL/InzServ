@@ -82,10 +82,10 @@ public class Client {
                                         // Jeśli to pozycja (12, 12), dodaj drugi obrazek
                                         ImageIcon drugiObrazek = new ImageIcon("img/mid.png");
                                         JLabel drugiLabel = new JLabel(drugiObrazek);
-                                        drugiLabel.setBounds(i * 32, j * 32, 32, 32);
+                                        drugiLabel.setBounds(j * 32, i * 32, 32, 32);
                                         miejsceNaGrafike.add(drugiLabel);
                                     }
-                                    label.setBounds(i * 32, j * 32, 32, 32);  // Zakładam, że obrazki mają wymiary 25x25
+                                    label.setBounds(j * 32, i * 32, 32, 32);  // Zakładam, że obrazki mają wymiary 25x25
                                     miejsceNaGrafike.add(label);
                                     miejsceNaGrafike.revalidate();
                                     miejsceNaGrafike.repaint();
@@ -129,12 +129,12 @@ public class Client {
 
 
         // Tworzenie okna
-        JFrame ramka = new JFrame("Podstawowa Aplikacja Okienkowa");
+        JFrame ramka = new JFrame("Client");
 
-        JTextField poleTekstowe = new JTextField(100); // 20 to szerokość pola w znakach
+        JTextField poleTekstowe = new JTextField(63); // 20 to szerokość pola w znakach
 
         // Tworzenie przycisku
-        JButton przycisk = new JButton("Kliknij mnie");
+        JButton przycisk = new JButton("Wyslij");
 
         obszarTekstowy = new JTextArea(4, 1);
 
@@ -207,16 +207,16 @@ public class Client {
                 System.out.println("RUSZ");
                 switch (key) {
                     case KeyEvent.VK_UP:
-                        client.move(0, -1);  // Przesunięcie w górę
+                        client.move(-1, 0);  // Przesunięcie w górę
                         break;
                     case KeyEvent.VK_DOWN:
-                        client.move(0, 1);  // Przesunięcie w dół
+                        client.move(1, 0);  // Przesunięcie w dół
                         break;
                     case KeyEvent.VK_LEFT:
-                        client.move(-1, 0);  // Przesunięcie w lewo
+                        client.move(0, -1);  // Przesunięcie w lewo
                         break;
                     case KeyEvent.VK_RIGHT:
-                        client.move(1, 0);  // Przesunięcie w prawo
+                        client.move(0, 1);  // Przesunięcie w prawo
                         break;
                 }
             }
@@ -226,16 +226,16 @@ public class Client {
                 System.out.println("RUSZ");
                 switch (key) {
                     case KeyEvent.VK_UP:
-                        client.move(0, -1);  // Przesunięcie w górę
+                        client.move(-1, 0);  // Przesunięcie w górę
                         break;
                     case KeyEvent.VK_DOWN:
-                        client.move(0, 1);  // Przesunięcie w dół
+                        client.move(1, 0);  // Przesunięcie w dół
                         break;
                     case KeyEvent.VK_LEFT:
-                        client.move(-1, 0);  // Przesunięcie w lewo
+                        client.move(0, -1);  // Przesunięcie w lewo
                         break;
                     case KeyEvent.VK_RIGHT:
-                        client.move(1, 0);  // Przesunięcie w prawo
+                        client.move(0, 1);  // Przesunięcie w prawo
                         break;
                 }
             }
@@ -263,7 +263,7 @@ public class Client {
 
         // Konfiguracja ramki
         ramka.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ramka.setSize( 	1280, 1000); // Ustawienie rozmiaru
+        ramka.setSize( 	820, 945); // Ustawienie rozmiaru
         ramka.setLocationRelativeTo(null); // Wyśrodkowanie ramki
         ramka.setVisible(true); // Ustawienie widoczności
 
